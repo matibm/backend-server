@@ -8,6 +8,11 @@ var rolesValidos = {
     message: '{VALUE} no es un rol permitido'
 }
 
+var tiposDeUsuario = {
+    values: ['PASAJERO', 'CONDUCTOR'],
+    message: '{value} no es un tipo de usuario permitido'
+}
+
 var usuarioSchema = new Schema({
 
     nombre: { type: String, required: [true, 'El nombre es necesario'] },
@@ -15,7 +20,8 @@ var usuarioSchema = new Schema({
     password: { type: String, required: [true, 'La contraseña es necesaria'] },
     img: { type: String, required: false },
     role: { type: String, required: true, default: 'USER_ROLE', enum: rolesValidos },
-    google: { type: Boolean, default: false }
+    google: { type: Boolean, default: false },
+    tipo: { type: String, required: true, default: 'PASAJERO', enum: tiposDeUsuario }
 
 });
 

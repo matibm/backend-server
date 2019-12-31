@@ -87,7 +87,7 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
             }
             var pathViejo = './uploads/usuarios/' + usuario.img;
             if (fs.existsSync(pathViejo)) {
-                fs.unlinkSync(pathViejo);
+                fs.unlink(pathViejo);
             }
             usuario.img = nombreArchivo;
             usuario.save((err, usuarioActualizado) => {
@@ -100,10 +100,11 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
                         errors: err
                     })
                 }
+
                 res.status(200).json({
                     ok: true,
                     messaje: 'Imag',
-                    Usuario: usuarioActualizado
+                    nombreCortado: usuarioActualizado
                 });
             });
         });
@@ -137,7 +138,7 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
                 res.status(200).json({
                     ok: true,
                     messaje: 'Imag',
-                    Medico: medicosActualizado
+                    nombreCortado: medicosActualizado
                 });
             });
         });
@@ -169,7 +170,7 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
                 res.status(200).json({
                     ok: true,
                     messaje: 'Imag',
-                    Hospital: hospitalActualizado
+                    nombreCortado: hospitalActualizado
                 });
             });
         });
