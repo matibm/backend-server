@@ -38,4 +38,36 @@ app.get('/', (req, res, next) => {
 })
 
 
+app.post('/', (req, res, next) => {
+    var data = req.body
+    console.log(data)
+    var post = new Post({
+        titulo: data.titulo,
+        origen: data.origen,
+        destino: data.destino,
+        contenido: data.contenido,
+        usuario: data.usuario,
+        auto: data.auto,
+        fecha: data.fecha,
+        cantidad: data.cantidad,
+
+    })
+
+    post.save((err, postGuardado) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                mensaje: 'error creando post',
+                errors: err
+            });
+        }
+
+        res.status(200).json({
+            ok: true,
+            post: postGuardado,
+            message: 'post creado correctamente'
+        })
+    })
+})
+
 module.exports = app;

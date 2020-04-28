@@ -37,6 +37,10 @@ var uploadRoutes = require('./routes/upload');
 var imagenesRoutes = require('./routes/imagenes');
 var busquedaRoutes = require('./routes/busqueda');
 var postRoutes = require('./routes/post');
+var solicitudRoutes = require('./routes/solicitud');
+var configRoutes = require('./routes/config');
+var excusaRoutes = require('./routes/excusa');
+var generatorRoutes = require('./routes/generator');
 var consultaRoutes = require('./routes/consulta');
 
 // Rutas
@@ -49,9 +53,14 @@ app.use('/img', imagenesRoutes);
 app.use('/busqueda', busquedaRoutes);
 app.use('/post', postRoutes);
 app.use('/consulta', consultaRoutes);
+app.use('/config', configRoutes);
+app.use('/excusa', excusaRoutes);
+app.use('/html', generatorRoutes);
+app.use('/solicitud', solicitudRoutes);
+
 app.use('/', appRoutes);
 
-mongoose.connection.openUri('mongodb://localhost:27017/hospitalDB', (err, res) => {
+mongoose.connection.openUri('mongodb+srv://matibm:rb433ah01@cluster0-pywni.mongodb.net/test?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=true', (err, res) => {
     if (err) throw err;
     console.log("Base de datos:  \x1b[32m%s\x1b[0m", ' online');
 })

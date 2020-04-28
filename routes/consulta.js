@@ -37,5 +37,35 @@ app.get('/', (req, res, next) => {
         })
 })
 
+app.post('/', (req, res) => {
+    console.log("Creando consulta");
+
+    var body = req.body
+
+    var consulta = new Consulta({
+        titulo: body.titulo,
+        contenido: body.contenido,
+        usuario: body.usuario,
+        fecha: body.fecha,
+        origen: body.origen,
+        destino: body.destino,
+    })
+
+    consulta.save((err, consultaGuardado) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                mensaje: 'error guardando consulta',
+                errors: err
+            });
+        }
+
+        res.status(200).json({
+            ok: true,
+            consulta: consultaGuardado
+        })
+
+    })
+})
 
 module.exports = app;

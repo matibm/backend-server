@@ -7,6 +7,19 @@ var jwt = require('jsonwebtoken');
 var Usuario = require('../models/usuario');
 var mdAutenticacion = require('../middleware/autenticacion');
 
+
+
+app.get('/:id', (req, res, next) => {
+    var id = req.params.id
+    Usuario.findById(id, (err, usuario) => {
+        res.status(200).json({
+            ok: true,
+            usuario: usuario
+        })
+    })
+})
+
+
 app.get('/', (req, res, next) => {
 
     var desde = req.query.desde || 0;
@@ -102,7 +115,7 @@ app.post('/', (req, res) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
-                mensaje: 'error cargando usuarios',
+                mensaje: 'error cargand o usuarios',
                 errors: err
             });
         }

@@ -75,7 +75,6 @@ app.put('/:tipo/:id', function(req, res) {
 
 
 function subirPorTipo(tipo, id, nombreArchivo, res) {
-
     if (tipo === 'usuarios') {
         Usuario.findById(id, (err, usuario) => {
             if (!usuario) {
@@ -123,6 +122,8 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
             if (fs.existsSync(pathViejo)) {
                 fs.unlink(pathViejo);
             }
+
+
             medicos.img = nombreArchivo;
 
             medicos.save((err, medicosActualizado) => {
