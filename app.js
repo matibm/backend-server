@@ -16,7 +16,7 @@ var cors = require('cors')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors(), function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Origin", ["http://167.71.101.134:3000", "http://localhost:3000"]); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "*"); // "Origin, X-Requested-With, Content-Type, Accept");
     if (req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
@@ -60,10 +60,28 @@ app.use('/solicitud', solicitudRoutes);
 
 app.use('/', appRoutes);
 
-mongoose.connection.openUri('mongodb+srv://matibm:rb433ah01@cluster0-pywni.mongodb.net/test?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=true', (err, res) => {
+mongoose.connection.openUri('mongodb+srv://matibm:rb433ah01@cluster0-pywni.mongodb.net/hospitalDB?retryWrites=true&w=majority', (err, res) => {
     if (err) throw err;
     console.log("Base de datos:  \x1b[32m%s\x1b[0m", ' online');
 })
+
+// mongoose.connect('  mongodb+srv://matibm:rb433ah01@cluster0-pywni.mongodb.net/test?retryWrites=true&w=majority', {
+//     useNewUrlParser: true,
+//     ssl: true,
+//     replicaSet: 'Cluster0-shard-0',
+//     authSource: 'admin',
+//     retryWrites: true
+// })
+
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb+srv://matibm:rb433ah01@cluster0-pywni.mongodb.net/test?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true });
+// client.connect(err => {
+//     const collection = client.db("test").collection("devices");
+//     console.log("Base de datos:  \x1b[32m%s\x1b[0m", ' online');
+//     // perform actions on the collection object
+//     client.close();
+// });
 
 // Escuchar peticiones 
 app.listen(3000, () => {
